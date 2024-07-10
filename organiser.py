@@ -8,14 +8,19 @@ from logger import logging
 from exception import CustomException
 from cron_job import run_cron_job
 
+# Check if a  foler path is passed in via the cmd argument
+if len(sys.argv) == 2:
+    folder_name_arg = sys.argv[1]
+else:
+    folder_name_arg = 'Downloads'
 
-if len(sys.argv) != 2:
-    print("Usage: python3 organiser.py <folder to organiser e.g Desktop>")
+if not os.path.exists(folder_name_arg):
+    print("Could not find such folder: %s" % folder_name_arg)
     sys.exit(1)
 
 
 path_ext = os.path.expanduser('~')
-folder_name = os.path.join(path_ext, sys.argv[1]) # Folder name to organise
+folder_name = os.path.join(path_ext, folder_name_arg) # Folder name to organise
 
 file_categories = {
     'Images': ['.jpg', '.jpeg', '.png', '.gif', '.webp'],
