@@ -1,7 +1,9 @@
 import os
+import sys
 import shutil
 
 from logger import logging
+from exception import CustomException
 
 path_ext = os.path.expanduser('~')
 downloads_path = os.path.join(path_ext, 'Downloads')
@@ -43,3 +45,4 @@ def organize_files():
 
     except Exception as e:
         logging.error(f'Error occurred while organizing files: {str(e)}')
+        raise CustomException(str(e), sys)
