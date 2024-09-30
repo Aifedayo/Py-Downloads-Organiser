@@ -10,12 +10,12 @@ from cron_job import run_cron_job
 
 
 if len(sys.argv) != 2:
-    print("Usage: python3 organizer.py <folder to organizer e.g Desktop>")
+    print("Usage: python3 organiser.py <folder to organiser e.g Desktop>")
     sys.exit(1)
 
 
 path_ext = os.path.expanduser('~')
-folder_name = os.path.join(path_ext, sys.argv[1]) # Folder name to organize
+folder_name = os.path.join(path_ext, sys.argv[1]) # Folder name to organise
 
 file_categories = {
     'Images': ['.jpg', '.jpeg', '.png', '.gif', '.webp'],
@@ -37,7 +37,7 @@ def create_folder_if_not_exists(folder_path):
         logging.info('Creating folder')
 
 
-def organize_files():
+def organise_files():
     try:
         for filename in os.listdir(folder_name):
 
@@ -65,6 +65,6 @@ def organize_files():
 
 if __name__ == '__main__':
     try:
-        organize_files()
+        organise_files()
     except KeyboardInterrupt:
         logging.info('User interrupted the script')

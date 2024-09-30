@@ -2,9 +2,10 @@ import os
 
 
 def run_cron_job():
-    path_to_organizer = os.path.abspath("organizer.py")
+    path_to_organiser = os.path.abspath("organiser.py")
+    print(path_to_organiser)
 
-    cron_job = f"0 0 * * * /usr/bin/python3 {path_to_organizer}"
+    cron_job = f"* * * * * /usr/bin/python3 {path_to_organiser}"
 
     existing_cron_jobs = os.popen('crontab -l').read()
     print(existing_cron_jobs)
