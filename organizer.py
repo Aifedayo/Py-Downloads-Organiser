@@ -9,11 +9,15 @@ path_ext = os.path.expanduser('~')
 downloads_path = os.path.join(path_ext, 'Downloads')
 
 file_categories = {
-    'Images': ['.jpg', '.jpeg', '.png', '.gif'],
-    'Documents': ['.pdf', '.docx', '.txt', '.xls', '.xlsx', '.csv'],
+    'Images': ['.jpg', '.jpeg', '.png', '.gif', '.webp'],
+    'Documents': ['.pdf', '.docx', '.doc', '.txt', '.xls', '.xlsx', '.csv', '.pptx'],
     'Videos': ['.mp4', '.mkv', '.mov'],
     'Music': ['.mp3', '.wav'],
     'Archives': ['.zip', '.tar', '.gz', '.rar'],
+    'Installer': ['.deb', '.rpm', '.AppImage', '.iso', '.vsix', '.xz'],
+    'Website': ['.html', ],
+    'Keys': ['.pem'],
+    'Unnamed': ['']
 }
 
 def create_folder_if_not_exists(folder_path):
@@ -25,7 +29,8 @@ def create_folder_if_not_exists(folder_path):
 def organize_files():
     try:
         for filename in os.listdir(downloads_path):
-            file_path = os.path.join(downloads_path, filename)
+
+            file_path = os.path.join(downloads_path, filename) # Get the full path of the file
 
             if os.path.isdir(file_path):
                 continue
@@ -33,11 +38,11 @@ def organize_files():
             _, file_ext = os.path.splitext(filename)
 
             for category, extensions in file_categories.items():
-                if file_ext.lower() in extensions:
+                if file_ext in extensions:
                     destination_folder = os.path.join(downloads_path, category)
-                    create_folder_if_not_exists(destination_folder)
+                    create_folder_if_not_exists(destination_folder) # Create the folder using the category name if it doesn't exist
 
-                    new_file_path = os.path.join(destination_folder, filename)
+                    new_file_path = os.path.join(destination_folder, filename) # 
                     shutil.move(file_path, new_file_path)
                     logging.info(f'Moved {filename} to {category}')
                     break
