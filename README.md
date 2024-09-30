@@ -1,10 +1,10 @@
-# Py-Downloads-Organiser
+# Py-Files-Organiser
 
 ## Overview
 
-Is your Downloads folder cluttered with files of all types—documents, images, videos, and more? Manually organizing them can be tedious and time-consuming. **Py-Downloads-Organizer** is a Python script designed to automatically sort and organize your downloaded files into categorized folders based on their file types.
+Is your Files folder cluttered with files of all types—documents, images, videos, and more? Manually organizing them can be tedious and time-consuming. **Py-Files-Organiser** is a Python script designed to automatically sort and organize your files into categorized folders based on their file types.
 
-This script runs daily at midnight using a cron job, keeping your Downloads folder tidy and well-organized without any manual effort.
+This script runs daily at midnight using a cron job, keeping your folder tidy and well-organized without any manual effort.
 
 ## Features
 
@@ -15,21 +15,21 @@ This script runs daily at midnight using a cron job, keeping your Downloads fold
 
 ## Problem Statement
 
-My Downloads folder was chaotic, filled with files of different types. Sorting them manually would have been a long and repetitive process, so I created **Py-Downloads-Organizer** to automate the task, letting me keep my files organized without lifting a finger.
+My Downloads folder was chaotic, filled with files of different types. Sorting them manually would have been a long and repetitive process, so I created **Py-Files-organiser** to automate the task, letting me keep my files organized without lifting a finger.
 
 ## Installation
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/yourusername/Py-Downloads-Organizer.git
-    cd Py-Downloads-Organizer
+    git clone https://github.com/yourusername/Py-Downloads-organiser.git
+    cd Py-Downloads-organiser
     ```
 
 2. **Install required dependencies**:
    The script uses Python's built-in modules (`os`, `shutil`, `logging`), so no additional installations are needed.
 
 3. **Edit the script**:
-   Open the Python script `PyDownloadsOrganizer.py` and update the path to your Downloads folder:
+   Open the Python script `organiser.py` and update the path to your Downloads folder:
 
    ```python
    downloads_folder = '/path/to/your/Downloads'
@@ -37,7 +37,7 @@ My Downloads folder was chaotic, filled with files of different types. Sorting t
 
 4. **Make the script executable** (optional):
    ```bash
-   chmod +x PyDownloadsOrganizer.py
+   chmod +x PyDownloadsorganiser.py
    ```
 
 ## Usage
@@ -45,35 +45,22 @@ My Downloads folder was chaotic, filled with files of different types. Sorting t
 You can run the script manually:
 
 ```bash
-python3 PyDownloadsOrganizer.py
+python3 organiser.py <folder name:e.g Downloads> 
 ```
-
-Or, if you’ve set up a cron job (explained below), it will run automatically at 12 AM each day.
 
 ### Set up a Cron Job
 
-To automatically run the script every day at midnight (12 AM):
-
-1. Open your crontab:
-   ```bash
-   crontab -e
-   ```
-
-2. Add the following line to schedule the script to run at 12 AM daily:
-   ```bash
-   0 0 * * * /usr/bin/python3 /path/to/PyDownloadsOrganizer.py
-   ```
-
-3. Save and exit the crontab. The script will now run daily at midnight.
+The cron job has been automatically set to run the script every day at midnight (12 AM)
+You can change this in the cron_job.py script
 
 ## Logging
 
 The script automatically logs all activities to a log file. The log file records details such as:
-- Which files were moved.
-- Which folders were created.
+- Which files were moved?
+- Which folders were created?
 - Any errors that occurred.
 
-You can find the log file at `/path/to/your/logfile.log`.
+You can find the log file at `cwd/logs/`.
 
 ## Customization
 
