@@ -1,12 +1,21 @@
+#!/usr/bin/env python # To be able to run with python3 regardless of where it is installed
+
 import os
 import sys
 import shutil
 
 from logger import logging
 from exception import CustomException
+from cron_job import run_cron_job
+
+
+if len(sys.argv) != 2:
+    print("Usage: python3 organizer.py <folder to organizer e.g Desktop>")
+    sys.exit(1)
+
 
 path_ext = os.path.expanduser('~')
-downloads_path = os.path.join(path_ext, 'Downloads')
+folder_name = os.path.join(path_ext, sys.argv[1]) # Folder name to organize
 
 file_categories = {
     'Images': ['.jpg', '.jpeg', '.png', '.gif', '.webp'],
@@ -17,8 +26,10 @@ file_categories = {
     'Installer': ['.deb', '.rpm', '.AppImage', '.iso', '.vsix', '.xz'],
     'Website': ['.html', ],
     'Keys': ['.pem'],
-    'Unnamed': ['']
+    'Unnamed Folder': ['']
 }
+
+run_cron_job() # Call the cron job at the top
 
 def create_folder_if_not_exists(folder_path):
     if not os.path.exists(folder_path):
@@ -28,9 +39,9 @@ def create_folder_if_not_exists(folder_path):
 
 def organize_files():
     try:
-        for filename in os.listdir(downloads_path):
+        for filename in os.listdir(folder_name):
 
-            file_path = os.path.join(downloads_path, filename) # Get the full path of the file
+            file_path = os.path.join(folder_name, filename) # Get the full path of the file
 
             if os.path.isdir(file_path):
                 continue
@@ -39,7 +50,7 @@ def organize_files():
 
             for category, extensions in file_categories.items():
                 if file_ext in extensions:
-                    destination_folder = os.path.join(downloads_path, category)
+                    destination_folder = os.path.join(folder_name, category)
                     create_folder_if_not_exists(destination_folder) # Create the folder using the category name if it doesn't exist
 
                     new_file_path = os.path.join(destination_folder, filename) # 
