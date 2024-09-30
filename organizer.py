@@ -10,7 +10,7 @@ downloads_path = os.path.join(path_ext, 'Downloads')
 
 file_categories = {
     'Images': ['.jpg', '.jpeg', '.png', '.gif'],
-    'Documents': ['.pdf', '.docx', '.txt', '.xls', '.xlsx'],
+    'Documents': ['.pdf', '.docx', '.txt', '.xls', '.xlsx', '.csv'],
     'Videos': ['.mp4', '.mkv', '.mov'],
     'Music': ['.mp3', '.wav'],
     'Archives': ['.zip', '.tar', '.gz', '.rar'],
@@ -46,3 +46,9 @@ def organize_files():
     except Exception as e:
         logging.error(f'Error occurred while organizing files: {str(e)}')
         raise CustomException(str(e), sys)
+
+if __name__ == '__main__':
+    try:
+        organize_files()
+    except KeyboardInterrupt:
+        logging.info('User interrupted the script')
